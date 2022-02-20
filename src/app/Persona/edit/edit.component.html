@@ -1,0 +1,36 @@
+<div class="container col-md-6">
+  <div class="card">
+    <div class="card-header">
+      <h3>Actualizar Personas</h3>
+    </div>
+    <div class="card-body">
+      <form action="" #editForm = "ngForm">
+        <div class="form-group">
+          <label for="">Nombre</label>
+          <input [(ngModel)]="persona.nombre" name="nombre" type="text" class="form-control" required minlength="4" maxlength="20" #nombre = "ngModel" placeholder="Escriba el nombre">
+          <div class="alert alert-danger" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+            <div *ngIf="nombre.errors?.['required']">Escriba su nombre por favor</div>
+            <div *ngIf="nombre.errors?.['minlength']">El nombre debe tener más de 4 carateres</div>
+            <div *ngIf="nombre.errors?.['maxlength']">El nombre debe tener hasta 20 carateres</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="">Apellidos</label>
+          <input [(ngModel)]="persona.apellidos" name="apellidos" type="text" class="form-control" required #apellidos = "ngModel" placeholder="Escriba los apellidos">
+          <div class="alert alert-danger" *ngIf="apellidos.invalid && (apellidos.dirty || apellidos.touched)">
+            <div *ngIf="apellidos.errors?.['required']">Escriba sus apellidos por favor</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="">Edad</label>
+          <input [(ngModel)]="persona.edad" name="edad" type="number" class="form-control" required #edad = "ngModel" placeholder="Escriba la edad">
+          <div class="alert alert-danger" *ngIf="edad.invalid && (edad.dirty || edad.touched)">
+            <div *ngIf="edad.errors?.['required']">Escriba su edad por favor</div>
+          </div>
+        </div>
+        <br>
+        <button (click)="Actualizar()" class="btn btn-danger" [disabled] = "!editForm.form.valid">Actualizar</button>
+      </form>
+    </div>
+  </div>
+</div>
