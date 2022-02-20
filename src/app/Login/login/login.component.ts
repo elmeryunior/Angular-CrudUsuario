@@ -10,7 +10,7 @@ import { ServiceService } from 'src/app/Service/service.service';
 })
 export class LoginComponent implements OnInit {
 
-  username = 'elmeryuniorng'
+  username = 'elmeryunior'
   password = ''
   invalidLogin = false
 
