@@ -1,23 +1,39 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Persona } from 'src/app/Modelo/Persona';
 import { ServiceService } from '../../Service/service.service';
 import swal from'sweetalert2';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-listar',
   templateUrl: './listar.component.html',
   styleUrls: ['./listar.component.css'],
 })
-export class ListarComponent implements OnInit {
+export class ListarComponent implements OnDestroy, OnInit {
+
+  dtOptions: DataTables.Settings = {};
+
+  dtTrigger: any = new Subject();
+
   personas: Persona[];
+
   constructor(private service: ServiceService, private router: Router) {}
 
   //este método se ejetuta al llamar al formulario
   ngOnInit(): void {
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 2,
+      //esto es la internalizacion
+      language: {
+        url: 'https://cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json'
+      }
+    };
     this.service.getPersonas().subscribe((data) => {
       this.personas = data;
+      this.dtTrigger.next();
     });
   }
 
@@ -55,5 +71,9 @@ export class ListarComponent implements OnInit {
         )
       }
     })
+  }
+
+  ngOnDestroy(): void {
+    this.dtTrigger.unsubscribe();
   }
 }

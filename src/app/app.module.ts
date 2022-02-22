@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ServiceService } from '../app/Service/service.service';
 import { LoginComponent } from './Login/login/login.component';
 import { LoginoutComponent } from './Login/loginout/loginout.component';
+import { DataTablesModule } from "angular-datatables";
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { LoginoutComponent } from './Login/loginout/loginout.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    DataTablesModule
   ],
   providers: [ServiceService],
   bootstrap: [AppComponent]
